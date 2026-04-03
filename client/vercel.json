@@ -1,0 +1,26 @@
+{
+  "version": 2,
+  "name": "nexus-ai-frontend",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist/nexus-ai"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/dist/nexus-ai/$1"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  },
+  "framework": null,
+  "outputDirectory": "dist/nexus-ai",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build"
+}

@@ -1,0 +1,41 @@
+services:
+  # Nexus AI Backend API
+  - type: web
+    name: nexus-ai-backend
+    env: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm start
+    healthCheckPath: /api/hello
+    
+    # Environment variables (set these in Render dashboard)
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+    
+    # Build configuration
+    buildFilter:
+      paths:
+        - server/package.json
+        - server/tsconfig.json
+        - server/src/**
+        - server/services/**
+        - server/controllers/**
+        - server/models/**
+        - server/middleware/**
+        - server/routes/**
+    
+    # Auto-deploy on main branch push
+    autoDeploy: true
+    
+    # Instance configuration
+    instanceType: free
+    region: oregon
+    
+  # Optional: Add a PostgreSQL database if needed in future
+  # - type: pserv
+  #   name: nexus-ai-db
+  #   plan: free
+  #   region: oregon
