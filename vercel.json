@@ -27,7 +27,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/client/dist/nexus-ai/$1"
+      "dest": "/client/dist/client/$1"
     }
   ],
   "env": {
