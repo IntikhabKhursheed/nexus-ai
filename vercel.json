@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "nexus-ai",
   "buildCommand": "npm run build",
   "outputDirectory": "dist/client",
   "installCommand": "npm install",
