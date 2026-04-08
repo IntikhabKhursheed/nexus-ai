@@ -53,24 +53,6 @@
   <!-- Right Side - Form -->
   <div class="w-full lg:w-1/2 flex items-center justify-center px-4 lg:px-12">
     <div class="max-w-md w-full">
-      <!-- Toggle Buttons -->
-      <div class="mb-8">
-        <div class="flex bg-gray-800 rounded-xl p-1 border border-gray-700">
-          <button
-            [class]="['flex-1 py-3 px-6 rounded-lg text-sm font-medium transition-all duration-200', isLoginMode ? 'bg-blue-600 text-white shadow-lg' : 'text-gray-400 hover:text-white']"
-            (click)="onSwitchMode()"
-          >
-            Sign In
-          </button>
-          <button
-            [class]="['flex-1 py-3 px-6 rounded-lg text-sm font-medium transition-all duration-200', !isLoginMode ? 'bg-blue-600 text-white shadow-lg' : 'text-gray-400 hover:text-white']"
-            (click)="onSwitchMode()"
-          >
-            Sign Up
-          </button>
-        </div>
-      </div>
-
       <!-- Form Title -->
       <div class="mb-8">
         <h2 class="text-3xl font-bold text-white mb-2">
@@ -147,15 +129,15 @@
 
       <!-- Footer -->
       <div class="mt-8 text-center">
-        <p class="text-gray-500 text-sm">
+        <p class="text-gray-400">
           {{ isLoginMode ? "Don't have an account?" : "Already have an account?" }}
-          <button 
-            (click)="onSwitchMode()" 
-            class="text-blue-400 hover:text-blue-300 font-medium transition-colors duration-200"
-          >
-            {{ isLoginMode ? 'Sign Up' : 'Sign In' }}
-          </button>
         </p>
+        <button 
+          (click)="onSwitchMode()" 
+          class="mt-2 text-blue-400 hover:text-blue-300 font-semibold text-lg transition-colors duration-200 hover:underline"
+        >
+          {{ isLoginMode ? 'Sign Up' : 'Sign In' }}
+        </button>
       </div>
     </div>
   </div>
