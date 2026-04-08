@@ -19,10 +19,12 @@
     {
       "src": "/api/(.*)",
       "dest": "/api/index.ts"
-    },
+    }
+  ],
+  "rewrites": [
     {
-      "src": "/(.*)",
-      "dest": "/client/dist/client/$1"
+      "source": "/(.*)",
+      "destination": "/client/dist/client/index.html"
     }
   ]
 }
