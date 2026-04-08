@@ -1,25 +1,9 @@
 {
   "version": 2,
   "name": "nexus-ai",
-  "builds": [
-    {
-      "src": "api/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "installCommand": "npm install",
-        "buildCommand": "echo 'No build needed for serverless functions'"
-      }
-    },
-    {
-      "src": "client/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "installCommand": "npm install",
-        "buildCommand": "npm run build",
-        "outputDirectory": "dist/client"
-      }
-    }
-  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist/client",
+  "installCommand": "npm install",
   "routes": [
     {
       "src": "/api/(.*)",
@@ -27,7 +11,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/client/dist/client/$1"
+      "dest": "/client/$1"
     }
   ],
   "env": {
@@ -46,6 +30,5 @@
     "api/ai.ts": {
       "maxDuration": 30
     }
-  },
-  "installCommand": "echo 'No root install needed'"
+  }
 }
