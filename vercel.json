@@ -6,14 +6,6 @@
       "use": "@vercel/node"
     },
     {
-      "src": "api/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "installCommand": "npm install",
-        "buildCommand": "echo 'No build needed for serverless functions'"
-      }
-    },
-    {
       "src": "client/package.json",
       "use": "@vercel/static-build",
       "config": {
@@ -30,7 +22,7 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/client/dist/client/$1"
+      "dest": "/client/$1"
     }
   ]
 }
