@@ -3,9 +3,9 @@
  * Coordinates blueprint detection, AI calls, and fallback logic
  */
 
-import AIService from './aiService.js';
-import { extractJSONFromAIResponse } from '../utils/parseAIResponse.js';
-import { detectProjectType, getAnchorTasks } from './blueprint.js';
+import AIService from './aiService';
+import { extractJSONFromAIResponse } from '../utils/parseAIResponse';
+import { detectProjectType, getAnchorTasks } from './blueprint';
 
 class TaskOrchestrator {
   private aiService: AIService;

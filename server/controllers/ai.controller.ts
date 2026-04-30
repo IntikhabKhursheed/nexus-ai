@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { AuthRequest } from '../middleware/auth.middleware.js';
+import { AuthRequest } from '../middleware/auth.middleware';
 import Groq from 'groq-sdk';
-import { ITask } from '../models/Task.js';
-import Task from '../models/Task.js';
-import TaskOrchestrator from '../services/taskOrchestrator.js';
+import { ITask } from '../models/Task';
+import Task from '../models/Task';
+import TaskOrchestrator from '../services/taskOrchestrator';
 
 const taskOrchestrator = new TaskOrchestrator();
 

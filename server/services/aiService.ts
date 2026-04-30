@@ -4,7 +4,7 @@
  */
 
 import Groq from 'groq-sdk';
-import { buildTaskPrompt } from './promptBuilder.js';
+import { buildTaskPrompt } from './promptBuilder';
 
 class AIService {
   private groq: any;

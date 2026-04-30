@@ -1,9 +1,17 @@
 import { Request, Response } from 'express';
-import User from '../models/User.js';
+import User from '../models/User';
 import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
+
+const checkDbConnection = () => {
+  if (mongoose.connection.readyState !== 1) {
+    throw new Error('Database is not connected. Please check your MongoDB connection.');
+  }
+};
 
 export const register = async (req: Request, res: Response) => {
   try {
+    checkDbConnection();
     console.log('Registration request body:', req.body);
     const { username, email, password } = req.body;
 
@@ -39,14 +47,23 @@ export const register = async (req: Request, res: Response) => {
         email: user.email
       }
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error('Registration error:', error);
-    res.status(500).json({ message: 'Server error' });
+    console.error('Error details:', {
+      message: error.message,
+      name: error.name,
+      code: error.code
+    });
+    res.status(500).json({ 
+      message: 'Server error',
+      error: error.message 
+    });
   }
 };
 
 export const login = async (req: Request, res: Response) => {
   try {
+    checkDbConnection();
     console.log('Login request body:', req.body);
     const { email, password } = req.body;
 

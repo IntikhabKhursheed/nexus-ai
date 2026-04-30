@@ -1,10 +1,11 @@
 import express from 'express';
 import mongoose from 'mongoose';
+import dns from 'dns';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import authRoutes from './routes/auth.routes.js';
-import taskRoutes from './routes/task.routes.js';
-import aiRoutes from './routes/ai.routes.js';
+import authRoutes from './routes/auth.routes';
+import taskRoutes from './routes/task.routes';
+import aiRoutes from './routes/ai.routes';
 
 dotenv.config();
 
@@ -24,7 +25,15 @@ app.use('/api/ai', aiRoutes);
 
 // MongoDB connection (optional for now)
 if (process.env.MONGODB_URI) {
-  mongoose.connect(process.env.MONGODB_URI)
+  if (process.env.MONGODB_URI.startsWith('mongodb+srv://')) {
+    dns.setServers(['8.8.8.8', '8.8.4.4']);
+  }
+
+  mongoose.connect(process.env.MONGODB_URI, {
+    serverSelectionTimeoutMS: 5000,
+    socketTimeoutMS: 45000,
+    bufferCommands: false
+  })
     .then(() => {
       console.log('Connected to MongoDB');
       app.listen(PORT, () => {

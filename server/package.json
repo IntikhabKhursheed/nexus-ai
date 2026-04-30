@@ -1,10 +1,9 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "type": "module",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec ts-node --esm server.ts",
+    "dev": "nodemon --exec ts-node server.ts",
     "build": "tsc",
     "start": "node -r dotenv/config dist/server.js",
     "postinstall": "npm run build",

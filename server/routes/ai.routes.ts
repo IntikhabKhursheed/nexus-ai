@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { analyzeTasks, generateProjectPlan, getProductivityInsights, generateSubtasks } from '../controllers/ai.controller.js';
-import { authenticateToken } from '../middleware/auth.middleware.js';
+import { analyzeTasks, generateProjectPlan, getProductivityInsights, generateSubtasks } from '../controllers/ai.controller';
+import { authenticateToken } from '../middleware/auth.middleware';
 
 const router = Router();
 

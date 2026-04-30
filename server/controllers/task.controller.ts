@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import Task from '../models/Task.js';
-import { AuthRequest } from '../middleware/auth.middleware.js';
+import Task from '../models/Task';
+import { AuthRequest } from '../middleware/auth.middleware';
 
 export const getTasks = async (req: AuthRequest, res: Response) => {
   try {
