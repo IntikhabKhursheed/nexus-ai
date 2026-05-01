@@ -1,1 +1,25 @@
-/* Component-specific styles if needed */
+:host {
+  display: block;
+  font-family: system-ui, Inter, sans-serif;
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: inherit;
+}
+
+header {
+  backdrop-filter: blur(12px);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+button.active {
+  background-color: rgba(107, 63, 230, 0.35);
+  color: white;
+}

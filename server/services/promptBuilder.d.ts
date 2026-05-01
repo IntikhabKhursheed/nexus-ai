@@ -1,1 +1,1 @@
-export function buildTaskPrompt(goal: string, anchorTasks: string[]): string;
+export function buildTaskPrompt(goal: string, anchorTasks?: string[]): string;

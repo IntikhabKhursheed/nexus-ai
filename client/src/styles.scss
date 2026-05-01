@@ -1,16 +1,30 @@
-/* Global Dark Theme Variables */
 :root {
-  --bg: #0B0F19;
-  --card: #111827;
-  --border: #1F2937;
-  --text: #E5E7EB;
-  --subtext: #9CA3AF;
-  --primary: #6366F1;
+  --bg: #080c18;
+  --surface: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.08);
+  --text: rgba(255,255,255,0.85);
+  --subtext: rgba(255,255,255,0.45);
+  --muted: rgba(255,255,255,0.25);
+  --primary: #6b3fe6;
+  --secondary: #14b8a6;
+  --font: system-ui, Inter, sans-serif;
+}
+
+html {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
 }
 
 body {
+  min-height: 100vh;
   background-color: var(--bg);
   color: var(--text);
+  font-family: inherit;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 @tailwind base;

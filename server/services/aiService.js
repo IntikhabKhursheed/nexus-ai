@@ -21,16 +21,17 @@ class AIService {
         messages: [
           {
             role: 'system',
-            content: prompt
+            content: 'You are a senior technical lead and task generation expert. Produce unique, goal-specific implementation tasks.'
           },
           {
             role: 'user',
-            content: `Goal: ${goal}`
+            content: prompt
           }
         ],
         model: 'llama-3.3-70b-versatile',
-        temperature: 0.7,
-        max_tokens: 1000
+        temperature: 0.85,
+        top_p: 0.95,
+        max_tokens: 900
       });
 
       return completion.choices[0]?.message?.content || '';

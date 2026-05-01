@@ -1,40 +1,33 @@
 /**
  * Prompt builder for AI task generation
- * Creates structured prompts for consistent, high-quality AI responses
+ * Creates highly specific tasks based on the exact goal.
  */
 
 export function buildTaskPrompt(goal: string, anchorTasks: string[] = []): string {
-  const anchorText = anchorTasks.length > 0 
-    ? `\n\nInclude these specific anchor tasks in your response:\n${anchorTasks.map(task => `- ${task}`).join('\n')}`
+  const anchorText = anchorTasks.length > 0
+    ? `\n\nUse these domain-specific anchor tasks as inspiration, but do not copy them exactly:\n${anchorTasks.map(task => `- ${task}`).join('\n')}`
     : '';
 
-  return `You are a senior software architect and project manager.
+  return `You are a Senior Technical Lead and software architect.
 
-Break the following goal into 5-7 specific, actionable, and technical tasks.
+Project goal: "${goal}"
 
-CRITICAL RULES:
-- Tasks must be highly specific to the goal
-- NEVER use generic phrases like "implement core functionality", "setup project", "test and debug"
-- Include relevant technologies mentioned or implied in the goal
-- Each task should be short, clear, and action-oriented
-- Make it feel like a real development roadmap with concrete steps
+Generate exactly 5 unique, highly specific implementation tasks for this exact project goal.
+Do not generate generic or repeated tasks.
+Each task must:
+- mention the domain or technology implied by the goal
+- be directly tied to the user's project
+- include a "priority" field with one of: "High", "Medium", "Low"
 
-TASK STRUCTURE:
-Each task must have:
-- title: Short, action-oriented (e.g. "Build React authentication form")
-- description: Specific details about implementation
-- priority: "High", "Medium", or "Low" based on development workflow
-
-${anchorText}
-
-Return ONLY a valid JSON array in this exact format:
+Return ONLY valid JSON in this exact format, with no markdown or additional explanation:
 [
   {
     "title": "string",
-    "description": "string", 
-    "priority": "High|Medium|Low"
+    "description": "string",
+    "priority": "High" | "Medium" | "Low"
   }
 ]
 
-Goal: ${goal}`;
+${anchorText}
+`;
 }

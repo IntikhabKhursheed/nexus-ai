@@ -21,6 +21,10 @@ export class DashboardComponent implements OnInit {
   isGeneratingPlan = false;
   goalInput = '';
   showAddTaskModal = false;
+  showAddForm = false;
+  activeFilter: 'all' | 'high' = 'all';
+  lastGoal = '';
+  lastGeneratedTags: string[] = [];
   productivityInsights: ProductivityInsights | null = null;
   isLoadingInsights = false;
   
@@ -75,6 +79,33 @@ export class DashboardComponent implements OnInit {
     });
   }
 
+  get totalTasks(): number {
+    return this.tasks.length;
+  }
+
+  get completedTasks(): number {
+    return this.tasks.filter(task => task.status === 'completed').length;
+  }
+
+  get inProgressTasks(): number {
+    return this.tasks.filter(task => task.status !== 'completed').length;
+  }
+
+  get highPriorityTasks(): number {
+    return this.tasks.filter(task => task.priority === 'high').length;
+  }
+
+  get filteredTasks(): Task[] {
+    if (this.activeFilter === 'high') {
+      return this.tasks.filter(t => t.priority?.toLowerCase() === 'high');
+    }
+    return this.tasks;
+  }
+
+  setFilter(filter: 'all' | 'high'): void {
+    this.activeFilter = filter;
+  }
+
   generateProjectPlan(): void {
     if (!this.goalInput.trim()) return;
 
@@ -85,6 +116,11 @@ export class DashboardComponent implements OnInit {
       next: (plan) => {
         this.projectPlan = plan;
         this.isGeneratingPlan = false;
+        this.lastGoal = this.goalInput;
+        this.lastGeneratedTags = plan.tasks
+          .map(generatedTask => generatedTask.title.split(' ')[0])
+          .filter(Boolean)
+          .slice(0, 3);
         
         // Automatically create tasks from generated plan
         plan.tasks.forEach(generatedTask => {
@@ -120,8 +156,16 @@ export class DashboardComponent implements OnInit {
     this.showAddTaskModal = true;
   }
 
+  toggleAddTaskForm(): void {
+    this.showAddForm = !this.showAddForm;
+    if (this.showAddForm) {
+      this.newTask = { title: '', description: '', priority: 'medium' };
+    }
+  }
+
   closeAddTaskModal(): void {
     this.showAddTaskModal = false;
+    this.showAddForm = false;
     this.newTask = { title: '', description: '', priority: 'medium' };
   }
 

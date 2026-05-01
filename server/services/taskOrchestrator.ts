@@ -29,18 +29,31 @@ class TaskOrchestrator {
       const projectType = detectProjectType(goal);
       const anchorTasks = getAnchorTasks(projectType);
 
-      // Call AI with anchor tasks
+      // Call AI for exact goal-specific tasks
       const aiResponse = await this.aiService.generateTasks(goal, anchorTasks);
       
       // Parse AI response
       let tasks = extractJSONFromAIResponse(aiResponse);
       
-      // Retry mechanism: if AI fails or returns invalid tasks
-      if (!tasks || tasks.length < 3) {
-        console.log('AI response invalid, retrying with stricter prompt...');
+      const isSpecific = (title: string) => {
+        const goalWords = Array.from(new Set((goal.toLowerCase().match(/\b[\w']+\b/g) || []).map(w => w.trim())));
+        const titleWords = new Set((title.toLowerCase().match(/\b[\w']+\b/g) || []).map(w => w.trim()));
+        return goalWords.some(word => word && titleWords.has(word));
+      };
+
+      const tasksAreSpecific = tasks?.every(task => task.title && isSpecific(task.title));
+
+      // Retry mechanism: if AI fails, returns invalid tasks, or generates generic tasks
+      if (!tasks || tasks.length < 3 || !tasksAreSpecific) {
+        console.log('AI returned generic tasks, retrying...');
         
         const retryResponse = await this.aiService.generateTasks(goal, anchorTasks);
         tasks = extractJSONFromAIResponse(retryResponse);
+      }
+
+      const retrySpecific = tasks?.every(task => task.title && isSpecific(task.title));
+      if (!tasks || tasks.length < 3 || !retrySpecific) {
+        throw new Error('AI returned generic tasks, retrying...');
       }
       
       // Final fallback: if still no valid tasks, use anchor tasks
@@ -64,6 +77,9 @@ class TaskOrchestrator {
       console.error('Task orchestration failed:', error);
       
       // Emergency fallback: simple dynamic tasks
+      const projectType = detectProjectType(goal);
+      const anchorTasks = getAnchorTasks(projectType);
+      
       const simpleTasks: Array<{
         title: string;
         description: string;
@@ -71,18 +87,38 @@ class TaskOrchestrator {
       }> = [
         {
           title: `Plan ${goal} architecture`,
-          description: `Design technical architecture for ${goal}`,
+          description: `Design technical architecture and system design for ${goal}`,
           priority: 'High'
         },
         {
           title: `Build ${goal} core features`,
-          description: `Implement main functionality for ${goal}`,
+          description: `Implement main functionality and core modules for ${goal}`,
+          priority: 'High'
+        },
+        {
+          title: `Setup ${goal} database`,
+          description: `Configure and optimize database schema for ${goal}`,
+          priority: 'High'
+        },
+        {
+          title: `Implement ${goal} API`,
+          description: `Build REST/GraphQL API endpoints for ${goal}`,
           priority: 'High'
         },
         {
           title: `Test ${goal} implementation`,
-          description: `Create test suite for ${goal}`,
+          description: `Create comprehensive test suite for ${goal}`,
           priority: 'Medium'
+        },
+        {
+          title: `Deploy ${goal}`,
+          description: `Setup CI/CD and deployment pipeline for ${goal}`,
+          priority: 'Medium'
+        },
+        {
+          title: `Document ${goal}`,
+          description: `Create API documentation and technical guides for ${goal}`,
+          priority: 'Low'
         }
       ];
       
