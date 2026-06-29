@@ -25,6 +25,7 @@ export class DashboardComponent implements OnInit {
   activeFilter: 'all' | 'high' = 'all';
   lastGoal = '';
   lastGeneratedTags: string[] = [];
+  lastGenerationSource: 'ai' | 'fallback' | '' = '';
   productivityInsights: ProductivityInsights | null = null;
   isLoadingInsights = false;
   
@@ -117,6 +118,7 @@ export class DashboardComponent implements OnInit {
         this.projectPlan = plan;
         this.isGeneratingPlan = false;
         this.lastGoal = this.goalInput;
+        this.lastGenerationSource = plan.source || '';
         this.lastGeneratedTags = plan.tasks
           .map(generatedTask => generatedTask.title.split(' ')[0])
           .filter(Boolean)

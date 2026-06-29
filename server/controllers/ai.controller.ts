@@ -175,6 +175,8 @@ export const generateProjectPlan = async (req: AuthRequest, res: Response) => {
       tasks: result.tasks,
       goal: result.goal,
       projectType: result.projectType,
+      source: result.source,
+      attempts: result.attempts,
       timestamp: new Date().toISOString()
     });
 

@@ -16,6 +16,8 @@ export interface ProjectPlan {
     subtasks?: string[];
   }>;
   goal: string;
+  source?: 'ai' | 'fallback';
+  attempts?: number;
   timestamp: string;
 }
 
