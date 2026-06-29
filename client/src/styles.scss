@@ -1,13 +1,16 @@
 :root {
-  --bg: #080c18;
-  --surface: rgba(255,255,255,0.04);
-  --border: rgba(255,255,255,0.08);
-  --text: rgba(255,255,255,0.85);
-  --subtext: rgba(255,255,255,0.45);
-  --muted: rgba(255,255,255,0.25);
-  --primary: #6b3fe6;
-  --secondary: #14b8a6;
-  --font: system-ui, Inter, sans-serif;
+  --bg: #f4f7fb;
+  --surface: rgba(255, 255, 255, 0.88);
+  --surface-strong: #ffffff;
+  --border: rgba(148, 163, 184, 0.22);
+  --text: #0f172a;
+  --subtext: #475569;
+  --muted: #94a3b8;
+  --primary: #5b5ce2;
+  --secondary: #0f9b8e;
+  --accent: #7c3aed;
+  --shadow: 0 24px 80px rgba(15, 23, 42, 0.08);
+  --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 html {
@@ -21,10 +24,19 @@ body {
   background-color: var(--bg);
   color: var(--text);
   font-family: inherit;
+  background-image:
+    radial-gradient(circle at top left, rgba(91, 92, 226, 0.10), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(15, 155, 142, 0.10), transparent 24%);
+  background-attachment: fixed;
 }
 
 * {
   box-sizing: border-box;
+}
+
+::selection {
+  background: rgba(91, 92, 226, 0.16);
+  color: var(--text);
 }
 
 @tailwind base;

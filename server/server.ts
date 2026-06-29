@@ -11,6 +11,18 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+let serverStarted = false;
+
+const startServer = () => {
+  if (serverStarted) {
+    return;
+  }
+
+  serverStarted = true;
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
+};
 
 app.use(cors());
 app.use(express.json());
@@ -23,7 +35,10 @@ app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/ai', aiRoutes);
 
-// MongoDB connection (optional for now)
+// Start the HTTP server immediately so the app stays usable even if Mongo is unavailable.
+startServer();
+
+// MongoDB connection is optional for local development.
 if (process.env.MONGODB_URI) {
   if (process.env.MONGODB_URI.startsWith('mongodb+srv://')) {
     dns.setServers(['8.8.8.8', '8.8.4.4']);
@@ -42,14 +57,9 @@ if (process.env.MONGODB_URI) {
     })
     .catch((error) => {
       console.warn('MongoDB connection failed, continuing without database:', error.message);
-      app.listen(PORT, () => {
-        console.log(`Server is running on port ${PORT}`);
-      });
     });
 } else {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
+  console.warn('MONGODB_URI not set, running without database.');
 }
 
 export default app;

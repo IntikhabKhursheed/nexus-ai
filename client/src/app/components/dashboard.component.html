@@ -1,28 +1,28 @@
-<div class="bg-[var(--bg)] min-h-screen text-[var(--text)]">
-  <header class="border-b border-[rgba(255,255,255,0.07)] bg-[rgba(255,255,255,0.02)]">
+<div class="min-h-screen bg-[var(--bg)] text-[var(--text)]">
+  <header class="border-b border-[var(--border)] bg-[rgba(255,255,255,0.72)] backdrop-blur-xl">
     <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
       <div class="flex items-center gap-3">
-        <div class="flex h-[30px] w-[30px] items-center justify-center rounded-lg bg-gradient-to-br from-[#6b3fe6] to-[#5a32c7] shadow-[0_12px_30px_rgba(107,63,230,0.2)]">
+        <div class="flex h-[30px] w-[30px] items-center justify-center rounded-lg bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] shadow-[0_12px_30px_rgba(91,92,226,0.18)]">
           <svg class="h-4 w-4 text-white" viewBox="0 0 24 24" fill="none">
             <rect x="5" y="5" width="14" height="14" rx="4" fill="currentColor" opacity="0.2" />
             <path d="M8 10h8M8 13h8M8 16h4" stroke="white" stroke-width="1.8" stroke-linecap="round" />
           </svg>
         </div>
         <div>
-          <div class="text-base font-semibold text-white">Nexus AI</div>
-          <div class="text-sm text-[rgba(255,255,255,0.45)]">Project Planner</div>
+          <div class="text-base font-semibold text-[var(--text)]">Nexus AI</div>
+          <div class="text-sm text-[var(--subtext)]">Project Planner</div>
         </div>
       </div>
       <div class="flex flex-wrap items-center gap-3">
         <button
           (click)="toggleAddTaskForm()"
-          class="rounded-[8px] bg-gradient-to-br from-[#6b3fe6] to-[#5a32c7] px-4 py-2 text-sm font-medium text-white transition hover:opacity-95"
+          class="rounded-[10px] bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] px-4 py-2 text-sm font-medium text-white shadow-[0_16px_36px_rgba(91,92,226,0.18)] transition hover:opacity-95"
         >
           Add Task
         </button>
         <button
           (click)="logout()"
-          class="rounded-[8px] border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.06)] px-4 py-2 text-sm font-medium text-[rgba(255,255,255,0.65)] transition hover:bg-[rgba(255,255,255,0.08)]"
+          class="rounded-[10px] border border-[var(--border)] bg-white px-4 py-2 text-sm font-medium text-[var(--subtext)] transition hover:border-[rgba(91,92,226,0.22)] hover:text-[var(--text)]"
         >
           Logout
         </button>
@@ -31,16 +31,16 @@
   </header>
 
   <div *ngIf="showAddForm" class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-    <div class="rounded-[14px] border border-[var(--border)] bg-[var(--surface)] p-6 shadow-sm">
+    <div class="rounded-[16px] border border-[var(--border)] bg-[rgba(255,255,255,0.9)] p-6 shadow-[var(--shadow)] backdrop-blur-xl">
       <div class="mb-5 flex items-center justify-between">
         <div>
           <h3 class="text-lg font-semibold text-[var(--text)]">New Task</h3>
-          <p class="text-sm text-[rgba(255,255,255,0.55)]">Create a task directly from the dashboard.</p>
+          <p class="text-sm text-[var(--subtext)]">Create a task directly from the dashboard.</p>
         </div>
         <button
           type="button"
           (click)="showAddForm = false"
-          class="text-[rgba(255,255,255,0.55)] hover:text-white"
+          class="text-[var(--subtext)] hover:text-[var(--text)]"
         >
           Cancel
         </button>
@@ -48,32 +48,32 @@
       <form (ngSubmit)="addTask()">
         <div class="grid gap-4 sm:grid-cols-2">
           <div class="sm:col-span-2">
-            <label class="block text-[11px] uppercase tracking-[0.4px] text-[rgba(255,255,255,0.55)] mb-2">Task Title</label>
+            <label class="mb-2 block text-[11px] uppercase tracking-[0.4px] text-[var(--subtext)]">Task Title</label>
             <input
               type="text"
               [(ngModel)]="newTask.title"
               name="taskTitle"
               required
-              class="w-full rounded-[10px] border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.06)] px-3 py-3 text-[var(--text)] placeholder-[rgba(255,255,255,0.45)] outline-none focus:border-[rgba(107,63,230,0.7)] focus:ring-1 focus:ring-[rgba(107,63,230,0.15)]"
+              class="w-full rounded-[12px] border border-[var(--border)] bg-white px-3 py-3 text-[var(--text)] placeholder:text-slate-400 outline-none focus:border-[var(--primary)] focus:ring-4 focus:ring-[rgba(91,92,226,0.12)]"
               placeholder="Enter task title..."
             />
           </div>
           <div class="sm:col-span-2">
-            <label class="block text-[11px] uppercase tracking-[0.4px] text-[rgba(255,255,255,0.55)] mb-2">Description</label>
+            <label class="mb-2 block text-[11px] uppercase tracking-[0.4px] text-[var(--subtext)]">Description</label>
             <textarea
               [(ngModel)]="newTask.description"
               name="taskDescription"
               rows="3"
-              class="w-full rounded-[10px] border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.06)] px-3 py-3 text-[var(--text)] placeholder-[rgba(255,255,255,0.45)] outline-none focus:border-[rgba(107,63,230,0.7)] focus:ring-1 focus:ring-[rgba(107,63,230,0.15)]"
+              class="w-full rounded-[12px] border border-[var(--border)] bg-white px-3 py-3 text-[var(--text)] placeholder:text-slate-400 outline-none focus:border-[var(--primary)] focus:ring-4 focus:ring-[rgba(91,92,226,0.12)]"
               placeholder="Add task details..."
             ></textarea>
           </div>
           <div class="sm:col-span-2">
-            <label class="block text-[11px] uppercase tracking-[0.4px] text-[rgba(255,255,255,0.55)] mb-2">Priority</label>
+            <label class="mb-2 block text-[11px] uppercase tracking-[0.4px] text-[var(--subtext)]">Priority</label>
             <select
               [(ngModel)]="newTask.priority"
               name="taskPriority"
-              class="w-full rounded-[10px] border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.06)] px-3 py-3 text-[var(--text)] outline-none focus:border-[rgba(107,63,230,0.7)] focus:ring-1 focus:ring-[rgba(107,63,230,0.15)]"
+              class="w-full rounded-[12px] border border-[var(--border)] bg-white px-3 py-3 text-[var(--text)] outline-none focus:border-[var(--primary)] focus:ring-4 focus:ring-[rgba(91,92,226,0.12)]"
             >
               <option value="low">Low</option>
               <option value="medium">Medium</option>
@@ -84,14 +84,14 @@
         <div class="mt-4 flex flex-wrap gap-3">
           <button
             type="submit"
-            class="rounded-[10px] bg-gradient-to-br from-[#6b3fe6] to-[#5a32c7] px-5 py-3 text-sm font-semibold text-white transition hover:opacity-95"
+            class="rounded-[12px] bg-gradient-to-br from-[var(--primary)] to-[var(--accent)] px-5 py-3 text-sm font-semibold text-white shadow-[0_16px_36px_rgba(91,92,226,0.18)] transition hover:opacity-95"
           >
             Create Task
           </button>
           <button
             type="button"
             (click)="showAddForm = false"
-            class="rounded-[10px] border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.06)] px-5 py-3 text-sm font-semibold text-[rgba(255,255,255,0.75)] transition hover:bg-[rgba(255,255,255,0.08)]"
+            class="rounded-[12px] border border-[var(--border)] bg-white px-5 py-3 text-sm font-semibold text-[var(--subtext)] transition hover:border-[rgba(91,92,226,0.22)] hover:text-[var(--text)]"
           >
             Cancel
           </button>
@@ -101,33 +101,33 @@
   </div>
 
   <main class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-    <section class="grid gap-4 xl:grid-cols-4 mb-6">
-      <div class="rounded-[12px] border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] p-4">
-        <div class="text-[11px] uppercase tracking-[0.4px] text-[rgba(255,255,255,0.4)]">Total Tasks</div>
-        <div class="mt-3 text-2xl font-semibold text-[#a78bfa]">{{ tasks.length }}</div>
-        <div class="text-[11px] text-[rgba(255,255,255,0.3)]">Current backlog</div>
+    <section class="mb-6 grid gap-4 xl:grid-cols-4">
+      <div class="rounded-[14px] border border-[var(--border)] bg-[rgba(255,255,255,0.9)] p-4 shadow-sm">
+        <div class="text-[11px] uppercase tracking-[0.4px] text-[var(--muted)]">Total Tasks</div>
+        <div class="mt-3 text-2xl font-semibold text-[var(--primary)]">{{ tasks.length }}</div>
+        <div class="text-[11px] text-[var(--subtext)]">Current backlog</div>
       </div>
-      <div class="rounded-[12px] border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] p-4">
-        <div class="text-[11px] uppercase tracking-[0.4px] text-[rgba(255,255,255,0.4)]">Completed</div>
-        <div class="mt-3 text-2xl font-semibold text-[#34d399]">{{ completedTasks }}</div>
-        <div class="text-[11px] text-[rgba(255,255,255,0.3)]">Tasks finished</div>
+      <div class="rounded-[14px] border border-[var(--border)] bg-[rgba(255,255,255,0.9)] p-4 shadow-sm">
+        <div class="text-[11px] uppercase tracking-[0.4px] text-[var(--muted)]">Completed</div>
+        <div class="mt-3 text-2xl font-semibold text-emerald-600">{{ completedTasks }}</div>
+        <div class="text-[11px] text-[var(--subtext)]">Tasks finished</div>
       </div>
-      <div class="rounded-[12px] border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] p-4">
-        <div class="text-[11px] uppercase tracking-[0.4px] text-[rgba(255,255,255,0.4)]">In Progress</div>
-        <div class="mt-3 text-2xl font-semibold text-[#fbbf24]">{{ inProgressTasks }}</div>
-        <div class="text-[11px] text-[rgba(255,255,255,0.3)]">Active work</div>
+      <div class="rounded-[14px] border border-[var(--border)] bg-[rgba(255,255,255,0.9)] p-4 shadow-sm">
+        <div class="text-[11px] uppercase tracking-[0.4px] text-[var(--muted)]">In Progress</div>
+        <div class="mt-3 text-2xl font-semibold text-amber-500">{{ inProgressTasks }}</div>
+        <div class="text-[11px] text-[var(--subtext)]">Active work</div>
       </div>
-      <div class="rounded-[12px] border border-[rgba(255,255,255,0.08)] bg-[rgba(255,255,255,0.04)] p-4">
-        <div class="text-[11px] uppercase tracking-[0.4px] text-[rgba(255,255,255,0.4)]">High Priority</div>
-        <div class="mt-3 text-2xl font-semibold text-[#f87171]">{{ highPriorityTasks }}</div>
-        <div class="text-[11px] text-[rgba(255,255,255,0.3)]">Urgent tasks</div>
+      <div class="rounded-[14px] border border-[var(--border)] bg-[rgba(255,255,255,0.9)] p-4 shadow-sm">
+        <div class="text-[11px] uppercase tracking-[0.4px] text-[var(--muted)]">High Priority</div>
+        <div class="mt-3 text-2xl font-semibold text-rose-500">{{ highPriorityTasks }}</div>
+        <div class="text-[11px] text-[var(--subtext)]">Urgent tasks</div>
       </div>
     </section>
 
     <section class="grid gap-4 xl:grid-cols-[1fr_1.2fr]">
-      <div class="rounded-[14px] border border-[var(--border)] bg-[var(--surface)] p-6">
-        <div class="mb-5 flex items-center gap-3 text-sm uppercase tracking-[0.4px] text-[rgba(255,255,255,0.55)]">
-          <span class="inline-flex h-2.5 w-2.5 rounded-full bg-[#a78bfa]"></span>
+      <div class="rounded-[16px] border border-[var(--border)] bg-[rgba(255,255,255,0.9)] p-6 shadow-[var(--shadow)]">
+        <div class="mb-5 flex items-center gap-3 text-sm uppercase tracking-[0.4px] text-[var(--subtext)]">
+          <span class="inline-flex h-2.5 w-2.5 rounded-full bg-[var(--primary)]"></span>
           AI Project Planner
         </div>
         <div class="flex flex-col gap-3 sm:flex-row">
@@ -135,52 +135,52 @@
             type="text"
             [(ngModel)]="goalInput"
             placeholder="e.g. Build a SaaS app with authentication"
-            class="flex-1 rounded-[8px] border border-[rgba(255,255,255,0.1)] bg-[rgba(255,255,255,0.06)] px-3 py-3 text-[rgba(255,255,255,0.85)] placeholder-[rgba(255,255,255,0.45)] outline-none transition focus:border-[rgba(107,63,230,0.7)] focus:ring-1 focus:ring-[rgba(107,63,230,0.15)]"
+            class="flex-1 rounded-[12px] border border-[var(--border)] bg-white px-3 py-3 text-[var(--text)] placeholder:text-slate-400 outline-none transition focus:border-[var(--primary)] focus:ring-4 focus:ring-[rgba(91,92,226,0.12)]"
             (keydown.enter)="generateProjectPlan()"
           />
           <button
             (click)="generateProjectPlan()"
             [disabled]="isGeneratingPlan || !goalInput.trim()"
-            class="rounded-[8px] border border-[rgba(107,63,230,0.5)] bg-[rgba(107,63,230,0.25)] px-4 py-3 text-sm font-semibold text-[#a78bfa] transition hover:bg-[rgba(107,63,230,0.3)] disabled:cursor-not-allowed disabled:opacity-60"
+            class="rounded-[12px] border border-[rgba(91,92,226,0.22)] bg-[rgba(91,92,226,0.08)] px-4 py-3 text-sm font-semibold text-[var(--primary)] transition hover:bg-[rgba(91,92,226,0.12)] disabled:cursor-not-allowed disabled:opacity-60"
           >
             <span class="mr-2">✨</span>
             <span *ngIf="!isGeneratingPlan">Generate</span>
             <span *ngIf="isGeneratingPlan" class="animate-pulse">Generating...</span>
           </button>
         </div>
-        <div class="mt-5 rounded-[10px] border border-[rgba(107,63,230,0.2)] bg-[rgba(107,63,230,0.08)] p-4 text-sm text-[rgba(255,255,255,0.65)]">
-          <div class="font-semibold text-white mb-2">Last generated</div>
+        <div class="mt-5 rounded-[12px] border border-[rgba(91,92,226,0.16)] bg-[rgba(91,92,226,0.06)] p-4 text-sm text-[var(--subtext)]">
+          <div class="mb-2 font-semibold text-[var(--text)]">Last generated</div>
           <div *ngIf="lastGoal; else noProjectPlan">
-            <p class="text-sm text-[rgba(255,255,255,0.75)]">Goal: {{ lastGoal }}</p>
+            <p class="text-sm text-[var(--subtext)]">Goal: {{ lastGoal }}</p>
             <div class="mt-3 flex flex-wrap gap-2">
               <span
                 *ngFor="let tag of lastGeneratedTags; let i = index"
                 [ngClass]="{
-                  'border-[#a78bfa] bg-[#a78bfa]/10 text-[#a78bfa]': i % 3 === 0,
-                  'border-[#14b8a6] bg-[#14b8a6]/10 text-[#14b8a6]': i % 3 === 1,
-                  'border-[#fbbf24] bg-[#fbbf24]/10 text-[#fbbf24]': i % 3 === 2
+                  'border-[rgba(91,92,226,0.24)] bg-[rgba(91,92,226,0.10)] text-[var(--primary)]': i % 3 === 0,
+                  'border-[rgba(15,155,142,0.24)] bg-[rgba(15,155,142,0.10)] text-[var(--secondary)]': i % 3 === 1,
+                  'border-[rgba(245,158,11,0.24)] bg-[rgba(245,158,11,0.10)] text-amber-600': i % 3 === 2
                 }"
-                class="rounded-full border px-3 py-1 text-[10px] uppercase tracking-[0.4px] font-semibold"
+                class="rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.4px]"
               >
                 {{ tag }}
               </span>
             </div>
           </div>
           <ng-template #noProjectPlan>
-            <p class="text-[rgba(255,255,255,0.45)]">Generate a plan to preview the last goal and task categories here.</p>
+            <p class="text-[var(--muted)]">Generate a plan to preview the last goal and task categories here.</p>
           </ng-template>
         </div>
       </div>
 
-      <div class="rounded-[14px] border border-[var(--border)] bg-[var(--surface)] p-6">
+      <div class="rounded-[16px] border border-[var(--border)] bg-[rgba(255,255,255,0.9)] p-6 shadow-[var(--shadow)]">
         <div class="mb-5 flex flex-wrap items-center justify-between gap-3">
-          <div class="flex items-center gap-3 text-sm uppercase tracking-[0.4px] text-[rgba(255,255,255,0.55)]">
-            <span class="inline-flex h-2.5 w-2.5 rounded-full bg-[#14b8a6]"></span>
+          <div class="flex items-center gap-3 text-sm uppercase tracking-[0.4px] text-[var(--subtext)]">
+            <span class="inline-flex h-2.5 w-2.5 rounded-full bg-[var(--secondary)]"></span>
             Tasks
           </div>
           <div class="flex items-center gap-2">
-            <span class="rounded-[5px] bg-[rgba(255,255,255,0.08)] px-2.5 py-1 text-[11px] text-[rgba(255,255,255,0.45)]">{{ filteredTasks.length }}</span>
-            <div class="flex rounded-[10px] bg-[rgba(255,255,255,0.06)] p-1">
+            <span class="rounded-[6px] bg-slate-100 px-2.5 py-1 text-[11px] text-[var(--subtext)]">{{ filteredTasks.length }}</span>
+            <div class="flex rounded-[12px] border border-[var(--border)] bg-slate-50 p-1">
               <button
                 type="button"
                 (click)="setFilter('all')"
@@ -202,35 +202,35 @@
         </div>
 
         <div class="space-y-3">
-          <div *ngIf="!isLoading && filteredTasks.length === 0" class="rounded-[10px] border border-[rgba(255,255,255,0.07)] bg-[var(--bg)] p-6 text-center text-[rgba(255,255,255,0.45)]">
+          <div *ngIf="!isLoading && filteredTasks.length === 0" class="rounded-[12px] border border-dashed border-[var(--border)] bg-slate-50 p-6 text-center text-[var(--muted)]">
             No tasks yet. Add one or generate a project plan.
           </div>
-          <div *ngIf="isLoading" class="rounded-[10px] border border-[rgba(255,255,255,0.07)] bg-[var(--bg)] p-6 text-center text-[rgba(255,255,255,0.45)]">
+          <div *ngIf="isLoading" class="rounded-[12px] border border-dashed border-[var(--border)] bg-slate-50 p-6 text-center text-[var(--muted)]">
             Loading tasks...
           </div>
           <ng-container *ngIf="!isLoading && filteredTasks.length > 0">
-            <div *ngFor="let task of filteredTasks" class="group flex items-center justify-between rounded-[10px] border border-[rgba(255,255,255,0.07)] bg-[var(--surface)] p-4 transition duration-200 hover:border-[rgba(255,255,255,0.15)]">
+            <div *ngFor="let task of filteredTasks" class="group flex items-center justify-between rounded-[12px] border border-[var(--border)] bg-white p-4 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-[rgba(91,92,226,0.20)] hover:shadow-md">
               <div class="min-w-0">
                 <div class="flex flex-wrap items-center gap-2">
-                  <h3 class="text-[13px] font-semibold text-[var(--text)] truncate">{{ task.title }}</h3>
+                  <h3 class="truncate text-[13px] font-semibold text-[var(--text)]">{{ task.title }}</h3>
                   <span
                     [ngClass]="{
-                      'bg-[rgba(239,68,68,0.18)] text-[#f87171] border border-[rgba(239,68,68,0.25)]': task.priority === 'high',
-                      'bg-[rgba(251,191,36,0.15)] text-[#fbbf24] border border-[rgba(251,191,36,0.2)]': task.priority === 'medium',
-                      'bg-[rgba(52,211,153,0.15)] text-[#34d399] border border-[rgba(52,211,153,0.2)]': task.priority === 'low'
+                      'border border-rose-200 bg-rose-50 text-rose-500': task.priority === 'high',
+                      'border border-amber-200 bg-amber-50 text-amber-600': task.priority === 'medium',
+                      'border border-emerald-200 bg-emerald-50 text-emerald-600': task.priority === 'low'
                     }"
-                    class="rounded-[5px] px-2 py-1 text-[10px] uppercase tracking-[0.4px] font-semibold"
+                    class="rounded-[5px] px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.4px]"
                   >
                     {{ task.priority }}
                   </span>
                 </div>
-                <p class="mt-2 text-[12px] text-[rgba(255,255,255,0.35)] truncate">{{ task.description }}</p>
-                <div class="mt-3 text-[11px] text-[rgba(255,255,255,0.25)]">{{ task.createdAt | date:'short' }}</div>
+                <p class="mt-2 truncate text-[12px] text-[var(--subtext)]">{{ task.description }}</p>
+                <div class="mt-3 text-[11px] text-[var(--muted)]">{{ task.createdAt | date:'short' }}</div>
               </div>
-              <div class="flex items-center gap-2 ml-4">
+              <div class="ml-4 flex items-center gap-2">
                 <button
                   (click)="updateTaskStatus(task)"
-                  class="flex h-7 w-7 items-center justify-center rounded-[7px] border border-[rgba(52,211,153,0.2)] bg-[rgba(52,211,153,0.12)] text-[#34d399] transition duration-200 hover:bg-[rgba(52,211,153,0.18)]"
+                  class="flex h-7 w-7 items-center justify-center rounded-[8px] border border-emerald-200 bg-emerald-50 text-emerald-600 transition duration-200 hover:bg-emerald-100"
                   aria-label="Toggle complete"
                 >
                   <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -239,7 +239,7 @@
                 </button>
                 <button
                   (click)="deleteTask(task._id)"
-                  class="flex h-7 w-7 items-center justify-center rounded-[7px] border border-[rgba(239,68,68,0.25)] bg-[rgba(239,68,68,0.1)] text-[#f87171] transition duration-200 hover:bg-[rgba(239,68,68,0.15)]"
+                  class="flex h-7 w-7 items-center justify-center rounded-[8px] border border-rose-200 bg-rose-50 text-rose-500 transition duration-200 hover:bg-rose-100"
                   aria-label="Delete task"
                 >
                   <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
