@@ -40,14 +40,12 @@ class TaskOrchestrator {
       let tasks = extractJSONFromAIResponse(aiResponse);
       // Retry once if the model came back empty or malformed.
       if (!tasks || tasks.length < 3) {
-        console.log('AI returned too few tasks, retrying with a stronger prompt...');
         attempts += 1;
         const retryResponse = await this.aiService.generateTasks(goal, anchorTasks);
         tasks = extractJSONFromAIResponse(retryResponse);
       }
 
       if (!tasks || tasks.length < 3) {
-        console.log('AI tasks were still invalid after retry, using anchor task fallback');
         tasks = anchorTasks.slice(0, 5).map((task: string, index: number) => ({
           title: task,
           description: `Implement ${task.toLowerCase()} for ${goal}`,

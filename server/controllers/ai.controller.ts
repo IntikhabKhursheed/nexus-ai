@@ -58,10 +58,7 @@ export const getProductivityInsights = async (req: AuthRequest, res: Response) =
     }
 
     // Fetch all tasks for the authenticated user
-    console.log('Fetching tasks for userId:', req.user.userId);
     const tasks = await Task.find({ userId: req.user.userId }).exec();
-    console.log('Found tasks:', tasks.length);
-    console.log('Task IDs:', tasks.map(t => ({ id: t._id, title: t.title, status: t.status })));
     
     const totalTasks = tasks.length;
     const completedTasks = tasks.filter((task: ITask) => task.status === 'completed').length;
@@ -167,10 +164,6 @@ export const generateProjectPlan = async (req: AuthRequest, res: Response) => {
     // Use new task orchestrator for reliable task generation
     const result = await taskOrchestrator.generateProjectPlan(goal);
     
-    if (!result.success) {
-      console.log('Task generation partially failed, using fallback');
-    }
-
     res.json({
       tasks: result.tasks,
       goal: result.goal,
